@@ -1,6 +1,6 @@
 {
   "name": "binance-pay-merchant-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Binance Pay Merchant API wrapper with TypeScript",
   "author": "Thammarong Glomjai <thammrong@gmail.com>",
   "main": "dist/index.js",

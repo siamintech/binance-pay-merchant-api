@@ -27,6 +27,6 @@ export interface QueryOrderResult {
 export interface QueryOrderResponse {
   status: 'SUCCESS' | 'FAIL';
   code: string;
-  data: QueryOrderResult;
+  data?: QueryOrderResult;
   errorMessage: string;
 }

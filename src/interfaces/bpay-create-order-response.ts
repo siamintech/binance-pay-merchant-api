@@ -12,5 +12,6 @@ export interface CreateOrderResult {
 export interface CreateOrderResponse {
   status: 'SUCCESS' | 'FAIL';
   code: string;
-  data: CreateOrderResult;
+  data?: CreateOrderResult;
+  errorMessage?: string;
 }

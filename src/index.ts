@@ -10,6 +10,8 @@ import {
   OrderWebhookNotification,
   QueryOrder,
   QueryOrderResponse,
+  CloseOrder,
+  CloseOrderResponse,
 } from './interfaces';
 
 export type {
@@ -17,6 +19,8 @@ export type {
   CreateOrderResponse,
   QueryOrder,
   QueryOrderResponse,
+  CloseOrder,
+  CloseOrderResponse,
   BinancePayHeaders,
   BinancePayWebhook,
   OrderWebhookNotification,
@@ -64,13 +68,27 @@ export class BinancePayMerchantApi {
   /**
    * Query an order on Binance Pay (API Reference: https://binance-pay-docs.github.io/apidocs/merchantapi/en/#query-order)
    *
-   * @param query QueryOrder
+   * @param order QueryOrder
    *
    * @returns Promise<AxiosResponse<QueryOrderResponse>>
    */
-  queryOrder(query: QueryOrder): Promise<AxiosResponse<QueryOrderResponse>> {
-    const headers = this.sign(query);
-    return this.instance.post('/binancepay/openapi/v2/order/query', query, {
+  queryOrder(order: QueryOrder): Promise<AxiosResponse<QueryOrderResponse>> {
+    const headers = this.sign(order);
+    return this.instance.post('/binancepay/openapi/v2/order/query', order, {
+      headers,
+    });
+  }
+
+  /**
+   * Close an order on Binance Pay (API Reference: https://binance-pay-docs.github.io/apidocs/merchantapi/en/#close-order)
+   *
+   * @param order CloseOrder
+   *
+   * @returns Promise<AxiosResponse<CloseOrderResponse>>
+   */
+  closeOrder(order: CloseOrder): Promise<AxiosResponse<CloseOrderResponse>> {
+    const headers = this.sign(order);
+    return this.instance.post('/binancepay/openapi/order/close', order, {
       headers,
     });
   }
