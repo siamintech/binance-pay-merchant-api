@@ -38,6 +38,10 @@ export class BinancePayMerchantApi {
     if (axiosConfig.baseURL === undefined || axiosConfig.baseURL === null) {
       axiosConfig.baseURL = 'https://bpay.binanceapi.com';
     }
+
+    if (apiKey === '' || apiSecret === '') {
+      throw new Error('apiKey and apiSecret cannot be empty');
+    }
     this.apiKey = apiKey;
     this.apiSecret = apiSecret;
     this.instance = axios.create(axiosConfig);
@@ -95,7 +99,7 @@ export class BinancePayMerchantApi {
    */
   private sign(body: any): BinancePayHeaders {
     const ts = Date.now().toString();
-    const nonce = crypto.randomBytes(128 / 8).toString('base64');
+    const nonce = crypto.randomBytes(Math.ceil(128 / 8)).toString('base64');
 
     const payload = `${ts}\n${nonce}\n${JSON.stringify(body)}\n`;
     const hmac = crypto.createHmac('sha512', this.apiSecret);
